@@ -26,6 +26,7 @@ class FavoriteBloc extends Cubit<FavoriteState> {
       // List<UserModel> dataNew = [...userModels];
       // userModels.removeAt(index);
       // dataNew.insert(index, userChange);
+      //add
       emit(FavoriteStateData([...userModels]..removeAt(index)));
       // homeBloc.favorite(userModelSent);
       context.read<HomeBloc>().favorite(userModelSent);
