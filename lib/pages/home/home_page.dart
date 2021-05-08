@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:state_mamager/data/bloc/home_bloc.dart';
@@ -15,6 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static const TAG = 'HomePage';
+
   // final _homeBloc = HomeBloc(UserApiService());
 
   @override
@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print("rebuild home");
     var _loading = Container(
       alignment: Alignment.center,
       child: SizedBox(
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         child: ListView.builder(
             itemCount: userModels.length,
             itemBuilder: (context, index) {
-              return UserWidget(userModels[index], () {
+              return UserWidget(userModels[index].id, () {
                 // _homeBloc.favorite(userModels[index]);
                 context.read<HomeBloc>().favorite(userModels[index]);
               });

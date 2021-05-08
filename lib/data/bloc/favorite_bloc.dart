@@ -12,7 +12,10 @@ class FavoriteBloc extends Cubit<FavoriteState> {
     emit(FavoriteStateData(userModels));
   }
 
+
   void favorite(int index, BuildContext context) {
+
+    // state.when((userModels) => null, loading: loading, error: error)
     state.maybeWhen((userModels) {
       var userModelSent = userModels[index];
       // var userChange = UserModel(
@@ -27,7 +30,7 @@ class FavoriteBloc extends Cubit<FavoriteState> {
       // userModels.removeAt(index);
       // dataNew.insert(index, userChange);
       //add
-      emit(FavoriteStateData([...userModels]..removeAt(index)));
+      // emit(FavoriteStateData([...userModels]..removeAt(index)));
       // homeBloc.favorite(userModelSent);
       context.read<HomeBloc>().favorite(userModelSent);
     }, orElse: () {

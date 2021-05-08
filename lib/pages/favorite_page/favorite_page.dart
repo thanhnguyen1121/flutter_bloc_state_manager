@@ -32,6 +32,7 @@ class _FavoritePageState extends State<FavoritePage> {
 
   @override
   Widget build(BuildContext context) {
+    print("rebuild favorite");
     var _loading = Container(
       alignment: Alignment.center,
       child: SizedBox(
@@ -46,8 +47,9 @@ class _FavoritePageState extends State<FavoritePage> {
         child: ListView.builder(
             itemCount: userModels.length,
             itemBuilder: (context, index) {
-              return UserWidget(userModels[index], () {
-                _favoriteBloc.favorite(index,context);
+              return UserWidget(userModels[index].id, () {
+                // _favoriteBloc.favorite(index, context);
+                context.read<HomeBloc>().favorite(userModels[index]);
               });
             }),
       );
@@ -56,15 +58,16 @@ class _FavoritePageState extends State<FavoritePage> {
       appBar: AppBar(
         title: Text("Favorites"),
       ),
-      body: BlocProvider.value(
-        value: _favoriteBloc,
-        child: BlocBuilder<FavoriteBloc, FavoriteState>(
-          builder: (bloc, state) {
-            return state.when((userModels) => _content(userModels), loading: () => _loading,
-                error: (_) => _error);
-          },
-        ),
-      ),
+      body: _content(widget.userModels),
+      // body: BlocProvider.value(
+      //   value: _favoriteBloc,
+      //   child: BlocBuilder<FavoriteBloc, FavoriteState>(
+      //     builder: (bloc, state) {
+      //       return state.when((userModels) => _content(userModels),
+      //           loading: () => _loading, error: (_) => _error);
+      //     },
+      //   ),
+      // ),
     );
   }
 }
